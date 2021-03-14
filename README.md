@@ -1,2 +1,2 @@
 # Challenge-2
- Spce X klok
+ XT2 Clock
