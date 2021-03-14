@@ -1,0 +1,117 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-height: 100vh;
+	background: white;
+}
+
+.clock{
+	width: 350px;
+	height: 350px;
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	border: 8px solid black;
+	border-radius: 50%;
+}
+
+.clock::before{
+	content: '';
+	position: absolute;
+	width: 15px;
+	background: blue;
+	z-index: 10000;
+	border-radius: 50%;
+
+}
+
+.hour, .min, .sec{
+	position: absolute;
+}
+
+.hour, .hr{
+	width: 200px;
+	height: 200px;
+}
+
+.min, .mn{
+	width: 230px;
+	height: 230px;
+}
+
+.sec, .sc{
+	width: 250px;
+	height: 250px;
+}
+
+.hr, .mn, .sc{
+	display: flex;
+	justify-content: center;
+	position: absolute;
+}
+
+.hr::before{
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 100px;
+	background: green;
+}
+
+.mn::before{
+	content: '';
+	position: absolute;
+	width: 4px;
+	height: 110px;
+	background: pink;
+}	
+
+.sc::before{
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 120px;
+	background: yellow;
+}
+
+#digitalClock{
+	display: flex;
+	color: #a01a58;
+	font-size: 4em;
+	margin-top: 20px;
+	justify-content:center; 
+}
+
+.sunrise{
+	background-image: url('sunrise5-7.jpg');
+}
+
+.daytime{
+	background-image: url('daytime7-17.jpg');
+}
+
+
+.sunset{
+	background-image: url('sunset17-19.jpg');
+}
+
+.night{
+	background-image: url('night19-5.jpg');
+}
+
+.sunrise, .daytime, .sunset, .night{
+	width: 100%;
+	height: 100%;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+
+	

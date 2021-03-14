@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Clock </title>
+	<link rel="stylesheet" href="clockstyle.css"
+</head>
+
+<body>
+	
+	<div class="bgswitch" id="bgswitch">
+			<div class="sunrise" id="sunrise"></div>
+			<div class="daytime" id="daytime"></div>
+			<div class="sunset" id="sunset"></div>
+			<div class="night" id="night"></div> 
+	
+	
+	
+	<div class="clock"> 
+		
+		<div class="hour">
+			<div class="hr" id="hr"></div>
+		</div>
+		
+		<div class="min">
+			<div class="mn" id="mn"></div>
+		</div>
+		
+		<div class="sec">
+			<div class="sc" id="sc"></div>
+		</div>
+	</div>
+	
+	<div id="digitalClock">
+		<div id="hour"></div>
+		<div id="minutes"></div>
+		<div id="seconds"></div>
+		<div id="ampm"></div>
+	</div>
+	</div>
+	<script>
+		const hr = document.querySelector("#hr");
+		const mn = document.querySelector("#mn");
+		const sc = document.querySelector("#sc");
+		
+		setInterval(()=>{
+			
+			//REGULAR CLOCK//
+			let day = new Date();
+			let hh = day.getHours() * 30;
+			let mm = day.getMinutes() * 6;
+			let ss = day.getSeconds() * 6;
+			
+			hr.style.transform = `rotateZ(${hh+(mm/24)}deg)`;
+			mn.style.transform = `rotateZ(${mm}deg)`;
+			sc.style.transform = `rotateZ(${ss}deg)`;
+			
+			//DIGITAL CLOCK//
+			let hour = document.querySelector("#hour");
+			let minutes = document.querySelector("#minutes");
+			let seconds = document.querySelector("#seconds");
+			let ampm = document.querySelector("#ampm");
+			
+			let h = new Date().getHours();
+			let m = new Date().getMinutes();
+			let s = new Date().getSeconds();
+			var am = "AM"; 
+			
+			//BACKGROUND//
+			var bgswitch = document.getElementById('bgswitch');
+			var sunrise = document.getElementById('sunrise');
+			var daytime = document.getElementById('daytime');
+			var sunset = document.getElementById('sunset');
+			var night = document.getElementById('night');
+			
+			
+			switch(true){
+			
+			case s >= 0 && s <= 20 :
+			bgswitch.classList.remove('bgswitch');
+			sunrise.classList.add('sunrise');
+			daytime.classList.remove('daytime');
+			sunset.classList.remove('sunset');
+			night.classList.remove('night');
+			break;
+			
+			case s>= 20 && s <= 35 :
+			bgswitch.classList.add('bgswitch');
+			sunrise.classList.remove('sunrise');
+			daytime.classList.add('daytime');
+			sunset.classList.remove('sunset');
+			night.classList.remove('night');
+			break;
+			
+			case s>= 35 && s <= 50 :
+			bgswitch.classList.add('bgswitch');
+			sunrise.classList.remove('sunrise');
+			daytime.classList.remove('daytime');
+			sunset.classList.add('sunset');
+			night.classList.remove('night');
+			break;
+			
+			case s>= 50 && s <= 59 :
+			bgswitch.classList.add('bgswitch');
+			sunrise.classList.remove('sunrise');
+			daytime.classList.remove('daytime');
+			sunset.classList.remove('sunset');
+			night.classList.add('night');
+			break;
+			
+			}
+			
+			
+			if(h => 12){
+				var am = "PM"
+				}
+			
+			
+			h = (h < 10) ? "0" + h : h
+			m = (m < 10) ? "0" + m : m
+			s = (s < 10) ? "0" + s : s
+			
+			hour.innerHTML = h+":";
+			minutes.innerHTML = m+":";
+			seconds.innerHTML = s+"&nbsp";
+			ampm.innerHTML = am;
+		});
+	</script>
+</body>
+</html>
