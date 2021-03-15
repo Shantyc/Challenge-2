@@ -3,18 +3,19 @@
 <head>
 	<meta charset="utf-8">
 	<title> Clock </title>
-	<link rel="stylesheet" href="clockstyle.css"
+	<link rel="stylesheet" href="clockstyle.css">
+	<style>
+	@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+	</style>
 </head>
 
-<body>
+<body class="color" id="color" >
+	<div class="purple" id="purple"></div>	
+	<div class="blue" id="blue"></div>
+	<div class="yellow" id="yellow"></div>
+	<div class="red" id="red"></div>
+	
 	<div class="datum" id="datumdisplay"></div>
-	<div class="bgswitch" id="bgswitch">
-			<div class="sunrise" id="sunrise"></div>
-			<div class="daytime" id="daytime"></div>
-			<div class="sunset" id="sunset"></div>
-			<div class="night" id="night"></div> 
-	
-	
 	
 	<div class="clock"> 
 		<div class="hour">
@@ -38,6 +39,13 @@
 	</div>
 	</div>
 	<script>
+	
+		function addZero(month){
+			if(month < 10){
+				month = '0' + month;
+				return month;
+				}
+			}
 		const hr = document.querySelector("#hr");
 		const mn = document.querySelector("#mn");
 		const sc = document.querySelector("#sc");
@@ -54,14 +62,6 @@
 			mn.style.transform = `rotateZ(${mm}deg)`;
 			sc.style.transform = `rotateZ(${ss}deg)`;
 			
-			//DATUM//
-			var date = day.getDate();
-			var month = day.getMonth();
-			var year = day.getFullYear();
-			var datum = date + "-" + month + "-" + year ;
-			document.getElementById("datumdisplay").innertext = datum;
-			document.getElementById("datumdisplay").textContent = datum;
-			
 			
 			//DIGITAL CLOCK//
 			let hour = document.querySelector("#hour");
@@ -74,54 +74,65 @@
 			let s = new Date().getSeconds();
 			var am = "AM"; 
 			
+			//DATUM//
+			var date = day.getDate();
+			var month = day.getMonth() + 1;
+			var year = day.getFullYear();
+			var datum = date + "-" + month + "-" + year ;
+			document.getElementById("datumdisplay").innertext = datum;
+			document.getElementById("datumdisplay").textContent = datum;
 			
 			
 			//BACKGROUND//
-			var bgswitch = document.getElementById('bgswitch');
-			var sunrise = document.getElementById('sunrise');
-			var daytime = document.getElementById('daytime');
-			var sunset = document.getElementById('sunset');
-			var night = document.getElementById('night');
 			
 			
 			switch(true){
 			
-			case s >= 0 && s <= 20 :
-			bgswitch.classList.remove('bgswitch');
-			sunrise.classList.add('sunrise');
-			daytime.classList.remove('daytime');
-			sunset.classList.remove('sunset');
-			night.classList.remove('night');
+			// purple = sunrise //
+			// yellow =sunset//
+			//green = day //
+			//red = night //
+			
+			case h >= 5 && h <= 7 :
+			color.classList.remove('blue');
+			color.classList.add('purple');
+			color.classList.remove('yellow');
+			color.classList.remove('red');
 			break;
 			
-			case s>= 20 && s <= 35 :
-			bgswitch.classList.add('bgswitch');
-			sunrise.classList.remove('sunrise');
-			daytime.classList.add('daytime');
-			sunset.classList.remove('sunset');
-			night.classList.remove('night');
+			case h >= 7 && h <= 17 :
+			color.classList.remove('blue');
+			color.classList.add('green');
+			color.classList.remove('yellow');
+			color.classList.remove('red');
 			break;
 			
-			case s>= 35 && s <= 50 :
-			bgswitch.classList.add('bgswitch');
-			sunrise.classList.remove('sunrise');
-			daytime.classList.remove('daytime');
-			sunset.classList.add('sunset');
-			night.classList.remove('night');
+			case h >= 17 && h <= 19:
+			color.classList.remove('blue');
+			color.classList.remove('purple');
+			color.classList.add('yellow');
+			color.classList.remove('red');
 			break;
 			
-			case s>= 50 && s <= 59 :
-			bgswitch.classList.add('bgswitch');
-			sunrise.classList.remove('sunrise');
-			daytime.classList.remove('daytime');
-			sunset.classList.remove('sunset');
-			night.classList.add('night');
+			case h >= 19 && h <= 24 :
+			color.classList.remove('blue');
+			color.classList.remove('purple');
+			color.classList.remove('yellow');
+			color.classList.add('red');
 			break;
+			
+			case h >= 0 && h <= 5 :
+			color.classList.remove('blue');
+			color.classList.remove('purple');
+			color.classList.remove('yellow');
+			color.classList.add('red');
+			break;
+			
 			
 			}
 			
 			
-			if(h => 12){
+			if(h >= 12){
 				var am = "PM"
 				}
 			
@@ -130,6 +141,8 @@
 			m = (m < 10) ? "0" + m : m
 			s = (s < 10) ? "0" + s : s
 			
+			
+			
 			hour.innerHTML = h+":";
 			minutes.innerHTML = m+":";
 			seconds.innerHTML = s+"&nbsp";
@@ -137,5 +150,6 @@
 			
 		});
 	</script>
+	</div>
 </body>
 </html>
